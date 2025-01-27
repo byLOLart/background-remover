@@ -2,19 +2,19 @@ group 'com.example.background_remover'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.0'
     repositories {
         google()
         jcenter()
     }
 
-   dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-rootProject.allprojects {
+allprojects {
     repositories {
         google()
         mavenCentral()
@@ -25,8 +25,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     namespace 'com.example.background_remover'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -34,6 +43,11 @@ android {
     defaultConfig {
         minSdkVersion 23
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue "bool", "firebase_ml_vision_face_model_auto_download", "false"
+        resValue "bool", "firebase_ml_vision_barcode_model_auto_download", "false"
+        resValue "bool", "firebase_ml_vision_label_model_auto_download", "false"
+        resValue "bool", "firebase_ml_vision_text_model_auto_download", "false"
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -41,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -48,10 +63,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //ml-kit selfie segmentation
-    implementation 'com.google.mlkit:segmentation-selfie:16.0.0-beta5'
+    // ml-kit selfie segmentation
+    implementation 'com.google.mlkit:segmentation-selfie:16.0.0-beta6'
 
-    //kotlin coroutines
+    // kotlin coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
