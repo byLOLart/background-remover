@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Permitir solo conexiones locales para desarrollo -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+
+    <!-- Bloquear conexiones a servicios de recopilación de datos -->
+    <domain-config cleartextTrafficPermitted="false">
+        <!-- Google ML Kit y APIs -->
+        <domain includeSubdomains="true">*.googleapis.com</domain>
+        <domain includeSubdomains="true">vision.googleapis.com</domain>
+        <domain includeSubdomains="true">mlkit-api.googleapis.com</domain>
+        
+        <!-- Servicios de Google -->
+        <domain includeSubdomains="true">*.google.com</domain>
+        <domain includeSubdomains="true">*.gstatic.com</domain>
+        <domain includeSubdomains="true">*.android.com</domain>
+        
+        <!-- Firebase -->
+        <domain includeSubdomains="true">*.firebaseio.com</domain>
+        <domain includeSubdomains="true">*.firebase.com</domain>
+        <domain includeSubdomains="true">firebaseinstallations.googleapis.com</domain>
+        <domain includeSubdomains="true">firebasestorage.googleapis.com</domain>
+        <domain includeSubdomains="true">firestore.googleapis.com</domain>
+        
+        <!-- Analytics y Logging -->
+        <domain includeSubdomains="true">*.google-analytics.com</domain>
+        <domain includeSubdomains="true">app-measurement.com</domain>
+        <domain includeSubdomains="true">analytics.google.com</domain>
+        <domain includeSubdomains="true">firebaselogging.googleapis.com</domain>
+        
+        <!-- Transport y Data Collection -->
+        <domain includeSubdomains="true">transport-runtime.googleapis.com</domain>
+        <domain includeSubdomains="true">mobilesdk-pa.googleapis.com</domain>
+        <domain includeSubdomains="true">gcm.googleapis.com</domain>
+        
+        <!-- Crashlytics -->
+        <domain includeSubdomains="true">*.crashlytics.com</domain>
+        <domain includeSubdomains="true">firebase-settings.crashlytics.com</domain>
+        
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Configuración base restrictiva -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>
