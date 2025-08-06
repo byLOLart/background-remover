@@ -104,8 +104,9 @@ class _ImageEditorScreenState extends State<ImageEditorScreen> {
   }
 
   Widget _buildBrushPreview(BoxConstraints constraints) {
-    if (!_showBrushPreview || _currentOffset == null)
+    if (!_showBrushPreview || _currentOffset == null) {
       return const SizedBox.shrink();
+    }
 
     final double x = _currentOffset!.dx * constraints.maxWidth;
     final double y = _currentOffset!.dy * constraints.maxHeight;
