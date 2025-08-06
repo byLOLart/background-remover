@@ -6,7 +6,7 @@ homepage: https://github.com/Antoinegtir/background-remover
 
 environment:
   sdk: '>=3.6.0'
-  flutter: ">=3.0.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
